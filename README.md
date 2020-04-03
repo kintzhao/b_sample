@@ -9,7 +9,7 @@
 参考: b-spline学习-系数计算及程序实践
 https://blog.csdn.net/brightming/article/details/53953926
 
-
+[AGG 之贝塞尔插值](https://www.iteye.com/blog/liyiwen-705489)https://www.iteye.com/blog/liyiwen-705489
 
 ---------------------------------------------------------------
 
@@ -173,6 +173,59 @@ http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-ex-1.h
 如果选多了，则只取前面的点
 4 选够了控制点后，双击鼠标左键，进行插值，并将结果显示到界面中；
 如果没有选够，则提示信息。
+
+
+
+
+
+### AGG 之贝塞尔插值 :  控制点(中值+ 平移)  一种非常简单的多边形平滑方法
+
+A very simple method of smoothing polygons 一种非常简单的多边形平滑方法
+
+翻译：唐风
+
+之前 comp.graphic.algorithms 上有一个讨论，是关于怎么样使用曲线对多边形进行插值处理，使得最终产生的曲线是光滑的而且能通过所有的顶点。Gernot Hoffmann 建议说使用著名的 B-Spline 来进行插值。这里有他当时的文章。B-Spline 在这里效果很好，它看起来就像是一个固定在多边形顶点上的橡皮尺（elastic ruler）。
+
+
+spline_polygon1   spline_polygon2
+
+ 
+
+bezier_interpolation但我有个大胆的推测，我觉得肯定还存在更简单的方法。比如，使用三次贝塞曲线(cubic Bezier)进行近似。贝塞尔曲线有两个固定点（起点和终点），另加两个决定曲线形状的控制点(CP）。关于贝塞尔曲线的更多知识可以在搜索引擎中找到，比如，你可以参考 Paul Bourke 的站点。现在给贝塞尔曲线的锚点（固定点），也就是多边形的某一对顶点，那么问题是，我们怎么计算控制点的位置？我运行 Xara X 然后画出了右边这个图形，这很简单，所以我决定尝试下计算出它们的坐标。很显然，多边形两条相邻边的两个控制点与这两个控制点之间的顶点应该在一条直线上，只有这样，两条相邻的插值曲线才能平滑地连接在一起。所以，这两个控制点应该是相对于顶点是对称的，不过，也不全是……，因为真正的对称就要求它们与中心点的距离应该是相等的，但对于我们的情况中并不完全是这样的。一开始，我试着先算出多边形两条边的角平分线，然后把控制点放在这条角平分线的垂直线上。但从图上可以看到，控制点的连线并不会总是垂直于角平分线的。
+
+ 
+
+ 
+
+最终，我找到一个非常简单的办法，不需要任何复杂的数学计算。首先，我们计算出多边形所有边线的中点，Ai。
+
+bezier_interpolation_s1
+![1585892960788](http://images.cnblogs.com/cnblogs_com/liyiwen/WindowsLiveWriter/AGG_11435/bezier_interpolation_s1.jpg)
+
+
+
+
+然后连接起相邻边中点，得到很多线段，记为 Ci 。并用图记的方法计算出 Bi 点。
+
+bezier_interpolation_s2
+![1585892960788](http://images.cnblogs.com/cnblogs_com/liyiwen/WindowsLiveWriter/AGG_11435/bezier_interpolation_s2.jpg)
+
+ 
+
+ 
+
+最后一步，只需要简单地将 Ci 进行平移，平移的路径就是每条线段上 Bi 到对应顶点的路径。就这样，我们计算出了贝塞尔曲线的控制点，平滑的结果看起来也很棒。
+
+bezier_interpolation_s3
+
+![1585892960788](http://images.cnblogs.com/cnblogs_com/liyiwen/WindowsLiveWriter/AGG_11435/bezier_interpolation_s3_thumb.jpg)
+
+ 
+
+这里还可以做一点小小的改进，因为我们已经得到了一条决定控制点的直线，所以，我们可以根据需要，使控制点在这条直线上移动，这样可以改变插值曲线的状态。我使用了一个与控制点和顶点初始距离相关的系数 K ，用来沿直线移动控制点。控制点离顶点越远，图形看起来就越锐利。
+
+bezier_interpolation_s4
+![1585892960788](http://images.cnblogs.com/cnblogs_com/liyiwen/WindowsLiveWriter/AGG_11435/bezier_interpolation_s4_thumb.jpg)
 
 
 
