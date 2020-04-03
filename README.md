@@ -1,5 +1,8 @@
+ [贝塞尔曲线原理(简单阐述)](https://www.cnblogs.com/hnfxs/p/3148483.html)  <https://www.cnblogs.com/hnfxs/p/3148483.html>
+
 参考: b-spline学习-系数计算及程序实践
 https://blog.csdn.net/brightming/article/details/53953926
+
 
 
 --------------------------------------------------------------
@@ -54,7 +57,7 @@ http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-curve-
 重要的是对着图去看和理解代码：
 http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-triangle.jpg
 
- 
+
 测试的数据用的是：
 http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-ex-1.html
 
@@ -70,7 +73,7 @@ http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-ex-1.h
 如果选多了，则只取前面的点
 4 选够了控制点后，双击鼠标左键，进行插值，并将结果显示到界面中；
 如果没有选够，则提示信息。
- 
+
 
 
 
