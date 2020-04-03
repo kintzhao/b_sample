@@ -12,6 +12,8 @@ https://blog.csdn.net/brightming/article/details/53953926
 [AGG 之贝塞尔插值](https://www.iteye.com/blog/liyiwen-705489)https://www.iteye.com/blog/liyiwen-705489
 [B-样条基函数：定义 （B-spline Basis Functions: Definition）](<https://blog.csdn.net/tuqu/article/details/5177405>)
 
+[B-spline Curves 学习之前言 翻译](<https://www.cnblogs.com/icmzn/p/5100740.html>)
+
 ---------------------------------------------------------------
 
 ###  [贝塞尔曲线原理(简单阐述)](https://www.cnblogs.com/hnfxs/p/3148483.html) 
@@ -364,4 +366,7 @@ bezier_interpolation_s4
 
  
 
- 
+### B-spline Curves 学习之前言
+
+ <https://www.cnblogs.com/icmzn/p/5100740.html>
+
